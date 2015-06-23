@@ -1,11 +1,12 @@
+//notice, didn't user var here, as this is a global variable
 PlayersList = new Mongo.Collection('players');
 
-console.log("Hello World");
 
+//will only run on the client
 if(Meteor.isClient){
-  console.log("fuk me!!")
-}
 
+}
+//will only run on the server
 if(Meteor.isServer){
-  console.log("fuk kyu!!")
+
 }
