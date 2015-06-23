@@ -1,22 +1,6 @@
+Leaderboard 
+===========
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Tutorial from "Your First Meteor Application" written by David Turnbull.  This can be found at:
 
-
-Welcome to your Meteor project on Cloud9 IDE!
-
-To run your new app open your terminal and type:
-   
-    $ meteor --port $IP:$PORT
-
-
-Happy coding!
-The Cloud9 IDE team
-
-## Support & Documentation
-
-Meteor documentation can be found at http://docs.meteor.com/
+[http://meteortips.com/first-meteor-tutorial/](http://meteortips.com/first-meteor-tutorial/)
