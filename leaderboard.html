@@ -10,4 +10,10 @@
 <template name="leaderboard">
   Hello World
   <p>Just testing this...tee hee hee...</p>
+    <ul>
+        {{#each player}}
+            <li>{{name}}: {{score}}</li>
+        {{/each}}
+    </ul>
+    <p>The total number of players are <strong>{{countPlayers}}</strong></p>
 </template>
