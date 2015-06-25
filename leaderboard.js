@@ -15,7 +15,11 @@ if(Meteor.isClient){
 
     Template.leaderboard.events({
         'click .player': function(){
-            console.log("You clicked a .player!!" + this.name);
+            //console.log("You clicked a .player!!" + this.name);
+            var playerId = this._id;
+            Session.set('selectedPlayer', playerId);
+            //var selectedPlayer = Session.get('selectedPlayer');
+            //console.log(selectedPlayer);
         }
     });
 }
