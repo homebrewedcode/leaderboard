@@ -12,6 +12,12 @@ if(Meteor.isClient){
             return PlayersList.find().count();
         }
     });
+
+    Template.leaderboard.events({
+        'click .player': function(){
+            console.log("You clicked a .player!!" + this.name);
+        }
+    });
 }
 //will only run on the server
 if(Meteor.isServer){
