@@ -14,6 +14,9 @@
         {{#each player}}
             <li class="player {{selectedClass}}">{{name}}: {{score}}</li>
         {{/each}}
+        {{#if showSelectedPlayer}}
+            <li>Selected Player: {{showSelectedPlayer.name}}</li>
+        {{/if}}
     </ul>
     <p>The total number of players are <strong>{{countPlayers}}</strong></p>
     <input type="button" class="increment" value="Give 5 points">
