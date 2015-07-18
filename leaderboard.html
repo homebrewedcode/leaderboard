@@ -25,7 +25,10 @@
 </template>
 <template name="addPlayerForm">
     <form>
-        <input type="text" name="playerName">
+        <label for="playerName">Players Name</label>
+        <input type="text" name="playerName" id="playerName"><br>
+        <label for="initialScore">Players Initial Score</label>
+        <input type="text" name="initialScore" id="initialScore"><br>
         <p><input type="submit" value="Add Player"></p>
         <p><input type="button" class="remove" value="Remove Player"></p>
     </form>

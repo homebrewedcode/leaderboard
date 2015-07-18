@@ -1,4 +1,9 @@
 //notice, didn't user var here, as this is a global variable
+/*
+* TODO:
+*
+*
+* */
 PlayersList = new Mongo.Collection('players');
 
 
@@ -48,12 +53,20 @@ if(Meteor.isClient){
         'submit form': function(event){
             event.preventDefault();
             var playerNameVar = event.target.playerName.value;
-            //console.log(playerNameVar);
+            var initialScore = Number(event.target.initialScore.value);
+            //console.log('initial score:' + initialScore);
+
+            if(isNaN(initialScore)){
+                initialScore = 0;
+            }
 
             PlayersList.insert({
                name: playerNameVar,
-               score: 0
+               score: initialScore
             });
+
+
+
             Session.set('selectedPlayer', '');
             //console.log("Got the form homie!");
             //console.log(event.type);
