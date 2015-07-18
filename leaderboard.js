@@ -43,6 +43,33 @@ if(Meteor.isClient){
             PlayersList.update(selectedPlayer, {$inc: {score: -5}});
         }
     });
+
+    Template.addPlayerForm.events({
+        'submit form': function(event){
+            event.preventDefault();
+            var playerNameVar = event.target.playerName.value;
+            //console.log(playerNameVar);
+
+            PlayersList.insert({
+               name: playerNameVar,
+               score: 0
+            });
+            Session.set('selectedPlayer', '');
+            //console.log("Got the form homie!");
+            //console.log(event.type);
+        },
+
+        'click .remove': function(){
+
+            var confirmRemove = confirm("Do you really want to remove this player?")
+
+            if (confirmRemove === true) {
+                var selectedPlayer = Session.get('selectedPlayer');
+                PlayersList.remove(selectedPlayer);
+            }
+
+        }
+    });
 }
 //will only run on the server
 if(Meteor.isServer){

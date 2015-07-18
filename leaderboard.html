@@ -21,4 +21,12 @@
         <input type="button" class="decrement" value="Take 5 points">
         <p><li>Selected Player: {{showSelectedPlayer.name}}</li></p>
     {{/if}}
+    {{> addPlayerForm}}
+</template>
+<template name="addPlayerForm">
+    <form>
+        <input type="text" name="playerName">
+        <p><input type="submit" value="Add Player"></p>
+        <p><input type="button" class="remove" value="Remove Player"></p>
+    </form>
 </template>
