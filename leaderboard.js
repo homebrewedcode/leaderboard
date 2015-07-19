@@ -1,7 +1,7 @@
 //notice, didn't user var here, as this is a global variable
 /*
 * TODO:
-*Left off on page 97
+*Left off on page 120
 *
 * */
 PlayersList = new Mongo.Collection('players');
@@ -9,11 +9,14 @@ PlayersList = new Mongo.Collection('players');
 
 //will only run on the client
 if(Meteor.isClient){
+
+    Meteor.subscribe('thePlayers');
+
     Template.leaderboard.helpers({
         'player': function(){
 
             var currentUserId = Meteor.userId();
-            return PlayersList.find({createdBy: currentUserId}, {sort: {score: -1, name: 1}} );
+            return PlayersList.find({}, {sort: {score: -1, name: 1}} );
         },
         'countPlayers': function(){
             return PlayersList.find().count();
@@ -90,5 +93,8 @@ if(Meteor.isClient){
 }
 //will only run on the server
 if(Meteor.isServer){
-
+    Meteor.publish('thePlayers', function(){
+        var currentUserId = this.userId;
+        return PlayersList.find({createdBy: currentUserId});
+    });
 }
