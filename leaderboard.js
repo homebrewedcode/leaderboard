@@ -1,7 +1,7 @@
 //notice, didn't user var here, as this is a global variable
 /*
 * TODO:
-*
+*Left off on page 97
 *
 * */
 PlayersList = new Mongo.Collection('players');
@@ -11,7 +11,9 @@ PlayersList = new Mongo.Collection('players');
 if(Meteor.isClient){
     Template.leaderboard.helpers({
         'player': function(){
-            return PlayersList.find({}, {sort: {score: -1, name: 1}} );
+
+            var currentUserId = Meteor.userId();
+            return PlayersList.find({createdBy: currentUserId}, {sort: {score: -1, name: 1}} );
         },
         'countPlayers': function(){
             return PlayersList.find().count();
@@ -52,6 +54,7 @@ if(Meteor.isClient){
     Template.addPlayerForm.events({
         'submit form': function(event){
             event.preventDefault();
+            var currentUserID = Meteor.userId();
             var playerNameVar = event.target.playerName.value;
             var initialScore = Number(event.target.initialScore.value);
             //console.log('initial score:' + initialScore);
@@ -62,7 +65,8 @@ if(Meteor.isClient){
 
             PlayersList.insert({
                name: playerNameVar,
-               score: initialScore
+               score: initialScore,
+               createdBy: currentUserID
             });
 
 
