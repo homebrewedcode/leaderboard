@@ -1,7 +1,8 @@
 //notice, didn't user var here, as this is a global variable
 /*
 * TODO:
-*Left off on page 120
+*Left off on page 127
+*Can now add players with initial score, cannot change score or remove players.
 *
 * */
 PlayersList = new Mongo.Collection('players');
@@ -57,7 +58,7 @@ if(Meteor.isClient){
     Template.addPlayerForm.events({
         'submit form': function(event){
             event.preventDefault();
-            var currentUserID = Meteor.userId();
+
             var playerNameVar = event.target.playerName.value;
             var initialScore = Number(event.target.initialScore.value);
             //console.log('initial score:' + initialScore);
@@ -66,15 +67,11 @@ if(Meteor.isClient){
                 initialScore = 0;
             }
 
-            PlayersList.insert({
-               name: playerNameVar,
-               score: initialScore,
-               createdBy: currentUserID
-            });
-
 
 
             Session.set('selectedPlayer', '');
+
+            Meteor.call('insertPlayerData', playerNameVar, initialScore);
             //console.log("Got the form homie!");
             //console.log(event.type);
         },
@@ -97,4 +94,18 @@ if(Meteor.isServer){
         var currentUserId = this.userId;
         return PlayersList.find({createdBy: currentUserId});
     });
+
+    Meteor.methods({
+        'insertPlayerData': function(playerNameVar, initalScore){
+            var currentUserId = Meteor.userId();
+            PlayersList.insert({
+                name: playerNameVar,
+                score: initalScore,
+                createdBy: currentUserId
+            })
+        }
+
+    });
+
+
 }
