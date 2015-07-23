@@ -1,8 +1,8 @@
 //notice, didn't user var here, as this is a global variable
 /*
 * TODO:
-*Left off on page 127
-*Can now add players with initial score, cannot change score or remove players.
+*Left off on page 134
+*All database modification code moved to server side
 *
 * */
 PlayersList = new Mongo.Collection('players');
@@ -46,12 +46,13 @@ if(Meteor.isClient){
         'click .increment': function(){
             var selectedPlayer = Session.get('selectedPlayer');
             //console.log(selectedPlayer);
-            PlayersList.update(selectedPlayer, {$inc: {score: 5}});
+            Meteor.call('modifyPlayerScore', selectedPlayer, 5);
         },
         'click .decrement': function(){
             var selectedPlayer = Session.get('selectedPlayer');
             //console.log(selectedPlayer);
-            PlayersList.update(selectedPlayer, {$inc: {score: -5}});
+            //PlayersList.update(selectedPlayer, {$inc: {score: -5}});
+            Meteor.call('modifyPlayerScore', selectedPlayer, -5);
         }
     });
 
@@ -82,7 +83,7 @@ if(Meteor.isClient){
 
             if (confirmRemove === true) {
                 var selectedPlayer = Session.get('selectedPlayer');
-                PlayersList.remove(selectedPlayer);
+                Meteor.call('removePlayerData', selectedPlayer);
             }
 
         }
@@ -103,6 +104,16 @@ if(Meteor.isServer){
                 score: initalScore,
                 createdBy: currentUserId
             })
+        },
+
+        'removePlayerData': function(selectedPlayer){
+            var currentUserId = Meteor.userId();
+            PlayersList.remove({_id: selectedPlayer, createdBy: currentUserId});
+        },
+
+        'modifyPlayerScore': function(selectedPlayer, value){
+            var currentUserId = Meteor.userId();
+            PlayersList.update({ _id: selectedPlayer, createdBy: currentUserId}, {$inc: {score: value}});
         }
 
     });
